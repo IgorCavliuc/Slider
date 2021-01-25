@@ -1,17 +1,22 @@
-const img = document.querySelector 
-(".slider_image");
+const btn = document.getElementById("open-model");
+const modal = document.getElementById("modal1");
 
-const imgArr = ["./img/me.jpg", "./img/cat.jpg", "./img/phone.jpg"];
+const closeBtn = document.querySelector(".modal_close");
 
-let currentIndex = 0;
+btn.onclick = () => {
+    modal.classList.add("modal_active");
 
-function slide(direction) {
-    currentIndex += direction;
-    if (currentIndex >= imgArr.length) {
-        currentIndex = 0;
-    }else if(currentIndex <0) {
-        currentIndex = imgArr.length -1;
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', hideModal);
+
+    function closeModal() {
+        modal.classList.remove("modal_active");
+        closeBtn.removeEventListener("click", closeModal);
+        modal.removeEventListener('click', hideModal);
+    };
+    function hideModal(event) {
+        if (event.target == modal){
+            closeModal();
+        }
     } 
-
-    img.src = imgArr[currentIndex]
-}
+}; 
